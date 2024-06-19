@@ -7,17 +7,5 @@
             "source.fixAll": "explicit"
         },
     },
-    "pylint.args": [
-        "--max-line-length=88"
-    ],
-    "flake8.args": [
-        "--max-line-lenght=88"
-    ],
-    "isort.arrs": [
-        "--profile",
-        "black"
-    ],
-    "editor.rulers": [
-        88
-    ]
+    "editor.rulers": [88]
 }
