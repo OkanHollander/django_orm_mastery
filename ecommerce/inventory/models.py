@@ -64,15 +64,15 @@ class AttributeValue(models.Model):
 
 
 class ProductLine(models.Model):
-    price = models.DecimalField()
+    price = models.DecimalField(max_digits=6, decimal_places=2)
     sku = models.UUIDField(default=uuid.uuid4)
     stock_qty = models.IntegerField(default=0)
     is_active = models.BooleanField(default=False)
     order = models.IntegerField()
     weight = models.FloatField()
     product = models.ForeignKey(Product, on_delete=models.PROTECT)
-    attribute_value = models.ManyToManyField(
-        AttributeValue, related_name="attribute_value"
+    attribute_values = models.ManyToManyField(
+        AttributeValue, related_name="attribute_values"
     )
 
 
