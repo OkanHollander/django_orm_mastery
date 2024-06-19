@@ -56,6 +56,7 @@ class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(unique=True)
     is_active = models.BooleanField(default=False)
+    parent = models.ForeignKey("self", on_delete=models.CASCADE, null=True)
 
 
 class SeasonalEvents(models.Model):
