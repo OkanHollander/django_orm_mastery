@@ -28,6 +28,10 @@ class Product(models.Model):
         choices=STOCK_STATUS,
         default=OUT_OF_STOCK,
     )
+    category = models.ForeignKey("Category", on_delete=models.CASCADE)
+    seasonal_event = models.ForeignKey(
+        "SeasonalEvents", on_delete=models.CASCADE, null=True
+    )
 
 
 class ProductLine(models.Model):
@@ -37,6 +41,7 @@ class ProductLine(models.Model):
     is_active = models.BooleanField(default=False)
     order = models.IntegerField()
     weight = models.FloatField()
+    product = models.ForeignKey("Product", on_delete=models.CASCADE)
 
 
 class ProductImage(models.Model):
@@ -44,6 +49,7 @@ class ProductImage(models.Model):
     alternative_text = models.CharField(max_length=100)
     url = models.ImageField()
     order = models.IntegerField()
+    product_line = models.ForeignKey("ProductLine", on_delete=models.CASCADE)
 
 
 class Category(models.Model):
