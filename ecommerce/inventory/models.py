@@ -43,7 +43,9 @@ class ProductLine(models.Model):
     order = models.IntegerField()
     weight = models.FloatField()
     product = models.ForeignKey("Product", on_delete=models.PROTECT)
-    attribute = models.ManyToManyField("Attribute", related_name="attribute")
+    attribute_value = models.ManyToManyField(
+        "AttributeValue", related_name="attribute_value"
+    )
 
 
 class ProductImage(models.Model):
@@ -75,3 +77,8 @@ class Attribute(models.Model):
 class ProductType(models.Model):
     name = models.CharField(max_length=100, unique=True)
     parent = models.ForeignKey("self", on_delete=models.CASCADE, null=True)
+
+
+class AttributeValue(models.Model):
+    attribute_value = models.CharField(max_length=100)
+    attribute = models.ForeignKey("Attribute", on_delete=models.CASCADE)
