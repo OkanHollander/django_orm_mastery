@@ -32,6 +32,7 @@ class Product(models.Model):
     seasonal_event = models.ForeignKey(
         "SeasonalEvents", on_delete=models.SET_NULL, null=True
     )
+    product_type = models.ManyToManyField("ProductType", related_name="product_type")
 
 
 class ProductLine(models.Model):
@@ -42,6 +43,7 @@ class ProductLine(models.Model):
     order = models.IntegerField()
     weight = models.FloatField()
     product = models.ForeignKey("Product", on_delete=models.PROTECT)
+    attribute = models.ManyToManyField("Attribute", related_name="attribute")
 
 
 class ProductImage(models.Model):
