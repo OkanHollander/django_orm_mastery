@@ -9,7 +9,8 @@ class Product(models.Model):
     slug = models.SlugField()
     description = models.TextField()
     is_digital = models.BooleanField()
-    created_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True, editable=False)
+    updated_at = models.DateTimeField(auto_now=True, editable=False)
     is_active = models.BooleanField()
 
 
