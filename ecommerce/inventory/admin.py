@@ -4,7 +4,9 @@ from .models import Category, Product
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("name",)}
+    # prepopulated_fields = {"slug": ("name",)}
+    readonly_fields = ("slug",)
+    list_display = ("name", "slug", "is_active", "parent")
 
 
 # Register your models here.
