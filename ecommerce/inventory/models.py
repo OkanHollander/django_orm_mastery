@@ -37,7 +37,10 @@ class SeasonalEvents(models.Model):
 
 class ProductType(models.Model):
     name = models.CharField(max_length=100)
-    parent = models.ForeignKey("self", on_delete=models.CASCADE)
+    parent = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Product(models.Model):
@@ -66,9 +69,20 @@ class Product(models.Model):
     )
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     seasonal_event = models.ForeignKey(
-        SeasonalEvents, on_delete=models.SET_NULL, null=True
+        SeasonalEvents,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
     )
     product_type = models.ManyToManyField(ProductType, related_name="product_type")
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
 
 
 class Attribute(models.Model):
