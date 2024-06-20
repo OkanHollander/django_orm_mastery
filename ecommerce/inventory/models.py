@@ -4,10 +4,14 @@ from django.db import models
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100, unique=True, verbose_name="Category Name")
     slug = models.SlugField(unique=True)
     is_active = models.BooleanField(default=False)
     parent = models.ForeignKey("self", on_delete=models.PROTECT, null=True, blank=True)
+
+    class Meta:
+        verbose_name = "Inventory Category"
+        verbose_name_plural = "Categories"
 
     def __str__(self):
         return self.name
