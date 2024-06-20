@@ -2,7 +2,12 @@ from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html
 
-from .models import Category, Product, ProductType
+from .models import Category, Product, ProductLine, ProductType
+
+
+class ProductLineInLine(admin.StackedInline):
+    model = ProductLine
+    extra = 1
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -24,6 +29,7 @@ class ProductAdmin(admin.ModelAdmin):
         return format_html(f'<a href="{link}">{obj.category.name}</a>')
 
     category_link.short_description = "Category"  # Optional: Set the column header
+    inlines = [ProductLineInLine]
 
 
 class ProductTypeAdmin(admin.ModelAdmin):
