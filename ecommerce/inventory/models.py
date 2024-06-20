@@ -4,7 +4,12 @@ from django.db import models
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=100, unique=True, verbose_name="Category Name")
+    name = models.CharField(
+        max_length=100,
+        unique=True,
+        verbose_name="Category Name",
+        help_text="Enter a category",
+    )
     slug = models.SlugField(unique=True)
     is_active = models.BooleanField(default=False)
     parent = models.ForeignKey("self", on_delete=models.PROTECT, null=True, blank=True)
