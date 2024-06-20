@@ -9,6 +9,9 @@ class Category(models.Model):
     is_active = models.BooleanField(default=False)
     parent = models.ForeignKey("self", on_delete=models.PROTECT, null=True, blank=True)
 
+    def __str__(self):
+        return self.name
+
 
 class SeasonalEvents(models.Model):
     id = models.BigAutoField(primary_key=True)
