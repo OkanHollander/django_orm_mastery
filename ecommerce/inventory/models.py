@@ -1,6 +1,7 @@
 import uuid
 
 from django.db import models
+from django.utils.text import slugify
 
 
 class Category(models.Model):
@@ -10,13 +11,18 @@ class Category(models.Model):
         verbose_name="Category Name",
         help_text="Enter a category",
     )
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True)  # , null=True, blank=True)
     is_active = models.BooleanField(default=False)
     parent = models.ForeignKey("self", on_delete=models.PROTECT, null=True, blank=True)
 
     class Meta:
         verbose_name = "Inventory Category"
         verbose_name_plural = "Categories"
+
+    # def save(self, *args, **kwargs):
+    #     if not self.slug:
+    #         self.slug = slugify(self.name)
+    #     super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
